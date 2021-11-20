@@ -1,0 +1,30 @@
+{
+  "name": "la-balnave",
+  "version": "0.0.1",
+  "description": "lightweight js framework based on mvvm arch",
+  "main": "index.html",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/preset-typescript": "^7.16.0",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.4.0",
+    "core-js": "^3.17.3",
+    "live-server": "^1.2.1",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.43.4",
+    "typescript": "^4.4.4"
+  },
+  "scripts": {
+    "dev": "concurrently -k \"tsc --watch\" \"npm run serve\" \"npm run sass\"",
+    "babel": "babel --watch src --out-dir dist --extensions .ts",
+    "sass": "npx sass --watch assets/style:dist/assets/style",
+    "serve": "node node_server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nicolas Montmayeur",
+  "license": "MIT"
+}
