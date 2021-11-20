@@ -1,10 +1,12 @@
 import AppComponent from "../app/app.component.js";
+import TemplateBuilder from "./template_engine/template.builder.js";
+import BinderParameters from "./binding/binder.parameters.js";
 
 export default class Kernel {
     initApp(): void {
         this.initDarkMode();
         const appComponent = new AppComponent();
-        const binder = new Binder();
+        const binder = new BinderParameters();
         appComponent.onInit();
         binder.extractParam(appComponent);
         Kernel.loadComponent(binder.getParams()).then((component: Node) => {
@@ -15,8 +17,8 @@ export default class Kernel {
         })
     }
 
-    private static async loadComponent(binder: BinderParamsInterface): Promise<Node> {
-        const builder = new HtmlBuilder();
+    private static async loadComponent(binder: { [key: string]: string }): Promise<HTMLElement> {
+        const builder = new TemplateBuilder();
         const html = await builder.getParsedHtml('app.html', binder);
         (document.querySelector("#root") as HTMLDivElement).replaceWith(html);
         return html;

@@ -1,3 +1,8 @@
+import Route from "./route.js";
+import FS from "../utiles/FS";
+import BinderParameters from "../binding/binder.parameters.js";
+import TemplateBuilder from "../template_engine/template.builder.js";
+
 export default class Router {
     private routes: Route[] = [];
     private static instance: Router | null = null;
@@ -67,19 +72,19 @@ export default class Router {
 
         this.loadComponent().then((htmlComponent: Node) => {
             this.current!.viewModel.bindNavigation(htmlComponent);
-            this.current?.viewModel.bindHtmlEvent(htmlComponent)
+            this.current?.viewModel.bindHtmlEvent(htmlComponent);
             this.current!.viewModel.onLoaded();
         });
     }
 
     private async loadComponent(): Promise<Node> {
-        const binder = new Binder();
-        const htmlBuilder = new HtmlBuilder();
+        const binder = new BinderParameters();
+        const htmlBuilder = new TemplateBuilder();
         const viewModel = this.current!.viewModel;
         viewModel.onInit();
         binder.extractParam(viewModel);
         const html = await htmlBuilder.getParsedHtml(this.current!.htmlPath, binder.getParams());
-        htmlBuilder.routingDisplay(html);
+        this.render(html);
         return html;
     }
 
@@ -92,6 +97,12 @@ export default class Router {
             }
         }
         return this.instance;
+    }
+
+    private render(html: HTMLElement) {
+        const router = document.querySelector("router") as HTMLElement;
+        router.innerHTML = "";
+        router.append(html);
     }
 
     get current(): Route | null {
