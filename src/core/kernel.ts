@@ -1,23 +1,24 @@
 import AppComponent from "../app/app.component.js";
 import TemplateBuilder from "./template_engine/template.builder.js";
-import BinderParameters from "./binding/binder.parameters.js";
+import BindingCollection from "./binding/binding.collection.js";
 
 export default class Kernel {
     initApp(): void {
         this.initDarkMode();
         const appComponent = new AppComponent();
-        const binder = new BinderParameters();
+        const binder = new BindingCollection();
+
         appComponent.onInit();
-        binder.extractParam(appComponent);
-        Kernel.loadComponent(binder.getParams()).then((component: Node) => {
-            appComponent.bindNavigation(component)
-            appComponent.bindHtmlEvent(component);
+        Kernel.loadComponent().then((view: Element) => {
+            binder.addBinding(view, appComponent);
+            // appComponent.bindNavigation(component)
+            // appComponent.bindHtmlEvent(component);
             // console.log(appComponent.getEvents())
             appComponent.onLoaded();
         })
     }
 
-    private static async loadComponent(binder: { [key: string]: string }): Promise<HTMLElement> {
+    private static async loadComponent(binder?: { [key: string]: string }): Promise<HTMLElement> {
         const builder = new TemplateBuilder();
         const html = await builder.getParsedHtml('app.html', binder);
         (document.querySelector("#root") as HTMLDivElement).replaceWith(html);

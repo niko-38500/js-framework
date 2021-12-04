@@ -31,9 +31,8 @@ export default class TemplateBuilder extends TemplateResolver {
     }
 
     private parseStringAsDom(htmlContent: string): HTMLElement {
-        const div = document.createElement("div");
+        let div = document.createElement("div");
         div.innerHTML = htmlContent;
-        console.log(div);
         return div;
     }
 }

@@ -70,20 +70,22 @@ export default class Router {
             window.history.pushState({page: this.current.name}, "", this.current.url)
         }
 
-        this.loadComponent().then((htmlComponent: Node) => {
-            this.current!.viewModel.bindNavigation(htmlComponent);
-            this.current?.viewModel.bindHtmlEvent(htmlComponent);
+        this.loadComponent().then((htmlComponent: HTMLElement) => {
+
+            // this.current!.viewModel.bindNavigation(htmlComponent);
+            // this.current?.viewModel.bindHtmlEvent(htmlComponent);
             this.current!.viewModel.onLoaded();
         });
     }
 
-    private async loadComponent(): Promise<Node> {
+    private async loadComponent(): Promise<HTMLElement> {
         const binder = new BinderParameters();
         const htmlBuilder = new TemplateBuilder();
         const viewModel = this.current!.viewModel;
         viewModel.onInit();
         binder.extractParam(viewModel);
-        const html = await htmlBuilder.getParsedHtml(this.current!.htmlPath, binder.getParams());
+        const html = await htmlBuilder.getParsedHtml(this.current!.htmlPath, binder.getSubscribtions());
+        console.log('jhg')
         this.render(html);
         return html;
     }

@@ -1,0 +1,9 @@
+<div>
+    <input type="text" bind="value: lastname">
+    <label>John</label>
+    <input type="radio" value="John" name="name" bind="value: name">
+    <label>john</label>
+    <input type="radio" value="jhn" name="name" bind="value: name">
+    <p bind='if: lastname === "Doe" && name === "John"'>Bonjour <span bind="text: lastname"></span></p>
+    <test-aa></test-aa>
+</div>
