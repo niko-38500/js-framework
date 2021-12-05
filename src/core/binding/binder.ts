@@ -3,6 +3,7 @@ import ViewModel from "../component/view.model.js";
 import BinderValueHandler from "./handlers/binder.value.handler.js";
 import BinderTextHandler from "./handlers/binder.text.handler.js";
 import BinderIfHandler from "./handlers/binder.if.handler.js";
+import BinderForHandler from "./handlers/binder.for.handler.js";
 
 export default abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
@@ -10,7 +11,8 @@ export default abstract class Binder {
     static handlers = {
         value: new BinderValueHandler(),
         text: new BinderTextHandler(),
-        if: new BinderIfHandler()
+        if: new BinderIfHandler(),
+        for: new BinderForHandler(),
     };
     // TODO : when a new subscriptions is set verify if the property is already observed
 

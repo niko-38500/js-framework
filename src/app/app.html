@@ -1,9 +1,39 @@
-<div>
-    <input type="text" bind="value: lastname">
-    <label>John</label>
-    <input type="radio" value="John" name="name" bind="value: name">
-    <label>john</label>
-    <input type="radio" value="jhn" name="name" bind="value: name">
-    <p bind='if: lastname === "Doe" && name === "John"'>Bonjour <span bind="text: lastname"></span></p>
-    <test-aa></test-aa>
-</div>
+<header>
+    <h1 navigate="home" class="header-title">La balnave</h1>
+    <nav class="header-nav">
+        <ul class="nav-links">
+            <li><a navigate="test" class="animate-underline">Documentation</a></li>
+            <li><a class="animate-underline">About</a></li>
+        </ul>
+    </nav>
+    <div id="search-input-box">
+        <input class="lb-input" type="text" placeholder="Search..." id="search-input">
+        <button>🔎</button>
+    </div>
+    <div class="toggle-dark-mode">
+        <div class="toggle-checkbox">
+            <input {% if isDarkModeEnable %}checked{% endif %} (click)="toggleDarkMode" id="checkbox-toggler" type="checkbox" />
+            <label for="checkbox-toggler"></label>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="burger-menu">
+        <span></span>
+    </div>
+    <div bind="text: tab[0].a"></div>
+    <!--    <p {% if isDarkModeEnable %}style="color: green;"{% endif %}>work</p>-->
+    <router></router>
+</main>
+<footer>
+    <span class="copyright">&copy;MIT La balnave</span>
+    <nav class="footer-nav">
+        <ul>
+            <li><a navigate="test">Link 1</a></li>
+            <li><a navigate="home">link 2</a></li>
+            <li><a href="#">link 3</a></li>
+            <li><a href="#">link 4</a></li>
+            <li><a href="#">link 5</a></li>
+        </ul>
+    </nav>
+</footer>

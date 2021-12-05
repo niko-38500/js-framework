@@ -9,7 +9,15 @@ export default class BinderCondition {
 
         condition.forEach((element: string) => {
             if (!/".*"/.test(element) && !regexSymbole.test(element)) {
-                this.conditionArgs.push(element.trim());
+                const arg = element.trim();
+                const context = (binding.context as any);
+
+                // if (!context.hasOwnProperty(arg)) {
+                //     throw `${arg} is not a property of ${context.constructor.name}:
+                //      on \<${binding.element.localName} bind="if: ${condition.join("")}"\>`;
+                // }
+
+                this.conditionArgs.push(arg);
             }
         });
     }

@@ -7,6 +7,14 @@ export default class BindingCollection {
     addBinding(elements: Element, context: ViewModel): void {
         const component = Object.getPrototypeOf(context).constructor.name;
         (this.bindingCollection as any)[component] = [];
+
+        elements.querySelectorAll('[lb-for]').forEach((element: Element) => {
+            const callback = element.getAttribute("lb-for")!;
+            const binding = new Binding(callback, "for", element, context);
+            (this.bindingCollection as any)[component].push(binding);
+            binding.bind();
+        });
+
         elements.querySelectorAll('[bind]').forEach((element: Element) => {
             const binder = element.getAttribute("bind")!.split(":");
             const handler = binder[0].trim();

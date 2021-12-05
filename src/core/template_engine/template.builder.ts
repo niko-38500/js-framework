@@ -16,7 +16,7 @@ export default class TemplateBuilder extends TemplateResolver {
             });
     }
 
-    async getParsedHtml(path: string, args?: { [key: string]: string }): Promise<HTMLElement> {
+    async getParsedHtml(path: string, args?: { [key: string]: any }): Promise<HTMLElement> {
         let htmlContent: string = "";
 
         try {

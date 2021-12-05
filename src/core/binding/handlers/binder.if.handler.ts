@@ -25,13 +25,36 @@ export default class BinderIfHandler extends BinderCondition {
         let parsedCondition = "";
 
         condition.forEach((element: string) => {
-            if (/".*"/.test(element) || regexSymbole.test(element)) {
-                parsedCondition += `${element.trim()} `;
+            element = element.trim();
+
+            if (/".*"/.test(element) || regexSymbole.test(element) || /^[0-9]+$/.test(element)) {
+                parsedCondition += `${element} `;
                 return;
             }
-            parsedCondition += typeof (binding.context as any)[element.trim()] === 'boolean'
-                ? `${(binding.context as any)[element.trim()]} `
-                : `"${(binding.context as any)[element.trim()]}" `;
+
+            if (/[\[\]]+/.test(element)) {
+                const splitArg = element.split(/(\[|])/);
+                let value: any;
+
+                splitArg.forEach((e: string, index: number) => {
+                    if ("" === e || /(\[|])/.test(e)) return;
+                    if (0 === index) {
+                        value = (binding.context as any)[e];
+                        return;
+                    }
+                    value = (value as any)[e];
+                })
+
+                parsedCondition += typeof value === "number" || typeof value === "boolean"
+                    ? `${value} `
+                    : `"${value}" `;
+
+                return;
+            } else if (typeof (binding.context as any)[element] === 'boolean') {
+                parsedCondition += `${(binding.context as any)[element]} `;
+                return;
+            }
+            parsedCondition += `"${(binding.context as any)[element]}" `;
         });
         const isTrue = eval(parsedCondition);
         if (isTrue) {

@@ -11,11 +11,11 @@ export default class Kernel {
         appComponent.onInit();
         Kernel.loadComponent().then((view: Element) => {
             binder.addBinding(view, appComponent);
-            // appComponent.bindNavigation(component)
+            // appComponent.bindNavigation(component);
             // appComponent.bindHtmlEvent(component);
             // console.log(appComponent.getEvents())
             appComponent.onLoaded();
-        })
+        });
     }
 
     private static async loadComponent(binder?: { [key: string]: string }): Promise<HTMLElement> {

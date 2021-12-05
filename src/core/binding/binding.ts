@@ -27,6 +27,21 @@ export default class Binding {
     }
 
     getValue(): any {
+        if (/[\[\]]+/.test(this.property)) {
+            const splitArg = this.property.split(/(\[|])/);
+            let value = "";
+
+            splitArg.forEach((e: string, index: number) => {
+                if ("" === e || /(\[|])/.test(e)) return;
+                if (0 === index) {
+                    value = (Binder.context as any)[e];
+                    return;
+                }
+                value = (value as any)[e];
+            })
+
+            return value;
+        }
         return (Binder.context as any)[this.property];
     }
 }
