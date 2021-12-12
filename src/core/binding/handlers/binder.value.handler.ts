@@ -11,7 +11,6 @@ export default class BinderValueHandler extends BinderParameters {
                 an element with bind value attribute must be of type HTMLInputElement 
             `
         }
-
         this.callback = () => this.listener(binding);
         this.initState(binding);
         binding.element.addEventListener('input', this.callback);

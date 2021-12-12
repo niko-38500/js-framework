@@ -27,7 +27,7 @@ export default class BinderIfHandler extends BinderCondition {
         condition.forEach((element: string) => {
             element = element.trim();
 
-            if (/".*"/.test(element) || regexSymbole.test(element) || /^[0-9]+$/.test(element)) {
+            if (/("|').*("|')/.test(element) || regexSymbole.test(element) || /^[0-9]+$/.test(element)) {
                 parsedCondition += `${element} `;
                 return;
             }

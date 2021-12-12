@@ -7,7 +7,8 @@ import BinderForHandler from "./handlers/binder.for.handler.js";
 
 export default abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
-    static context: ViewModel;
+    static context: ViewModel; // delete
+    static test: any;
     static handlers = {
         value: new BinderValueHandler(),
         text: new BinderTextHandler(),
@@ -16,7 +17,51 @@ export default abstract class Binder {
     };
     // TODO : when a new subscriptions is set verify if the property is already observed
 
-    static redefine(handler: string) {
+    static redefine(context: any, accessor: any = null) {
+        const keys = Object.keys(context);
+        if (keys) {
+            keys.forEach((key: string) => {
+                if (context.hasOwnProperty(key)) {
+                    if (context[key] instanceof Array) {
+                        context[key].forEach((e: any, i: number) => {
+                            if (context[key][i] instanceof Object) {
+                                if (accessor) {
+                                    this.redefine(context[key][i], `${accessor}[${key}][${i}]`);
+                                } else {
+                                    this.redefine(context[key][i], `${key}[${i}]`);
+                                }
+                            }
+                        })
+                    } else if (context[key] instanceof Object) {
+                        if (accessor) {
+                            this.redefine(context[key], `${accessor}[${key}]`);
+                        } else {
+                            this.redefine(context[key]);
+                        }
+                    }
+                    const e = accessor
+                        ? `${accessor}[${key}]`
+                        : key;
+                    let value = context[key];
+                    delete context[key]
+                    Object.defineProperty(context, key, {
+                        get() {
+                            return value;
+                        },
+                        set(newValue: string): void {
+                            const shouldUpdate = newValue !== value;
+                            value = newValue;
+                            if (shouldUpdate) {
+                                console.log(e)
+                                Binder.notify(e);
+                            }
+                        }
+                    })
+                }
+            })
+        }
+
+        /*
         const keys = Object.keys(this.context);
         keys.forEach((key: string) => {
             let value = (this.context as any)[key];
@@ -26,6 +71,7 @@ export default abstract class Binder {
                     return value;
                 },
                 set(newValue: string): void {
+                    console.log("sdgf");
                     const shouldUpdate = newValue !== value;
                     value = newValue;
                     if (shouldUpdate) {
@@ -34,6 +80,8 @@ export default abstract class Binder {
                 }
             })
         });
+
+         */
     }
 
     static subscribe(key: string, callback: () => any): void {
