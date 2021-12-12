@@ -1,0 +1,23 @@
+html {
+  --bg: #ffffff;
+  --primary: #0758d2;
+  --textOnPrimary: #FFFFFFF0;
+  --secondary: #113872;
+  --textOnSecondary: #FFFFFFF0;
+  --btn: rgba(103, 10, 217, 0.97);
+  --font: rgba(0, 0, 0, 0.95);
+  --link: rgba(35, 104, 194, 0.94);
+  --hover: rgba(85, 160, 241, 0.47);
+}
+
+html[dark] {
+  --bg: #232323;
+  --primary: rgba(11, 16, 31, 0.76);
+  --textOnPrimary: #fff;
+  --secondary: rgba(36, 58, 70, 0.94);
+  --textOnSecondary: rgba(231, 219, 219, 0.93);
+  --btn: rgba(217, 81, 10, 0.97);
+  --font: #fff;
+  --link: rgba(35, 104, 194, 0.94);
+  --hover: rgba(109, 170, 255, 0.47);
+}

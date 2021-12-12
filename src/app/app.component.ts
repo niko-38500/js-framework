@@ -1,8 +1,10 @@
 import ViewModel from "../core/component/view.model.js";
 
 export default class AppComponent extends ViewModel{
-    name = false;
+    name = 'john';
     lastname = "Doe";
+    isDarkModeEnable = document.documentElement.getAttribute('dark') === '';
+
     tab = [
         {
             a: "azhe",
@@ -19,6 +21,15 @@ export default class AppComponent extends ViewModel{
             },
         }
     ];
+
+    toggleDarkMode() {
+        const isDark = document.documentElement.getAttribute("dark");
+        if (isDark === "") {
+            document.documentElement.removeAttribute("dark");
+            return;
+        }
+        document.documentElement.setAttribute("dark", "");
+    }
 
     onInit() {
 

@@ -1,6 +1,7 @@
 import AppComponent from "../app/app.component.js";
 import TemplateBuilder from "./template_engine/template.builder.js";
 import BindingCollection from "./binding/binding.collection.js";
+import ViewModel from "./component/view.model.js";
 
 export default class Kernel {
     initApp(): void {
@@ -9,16 +10,15 @@ export default class Kernel {
         const binder = new BindingCollection();
 
         appComponent.onInit();
-        Kernel.loadComponent().then((view: Element) => {
+        Kernel.loadComponent(appComponent).then((view: HTMLElement) => {
             binder.addBinding(view, appComponent);
             // appComponent.bindNavigation(component);
-            // appComponent.bindHtmlEvent(component);
             // console.log(appComponent.getEvents())
             appComponent.onLoaded();
         });
     }
 
-    private static async loadComponent(binder?: { [key: string]: string }): Promise<HTMLElement> {
+    private static async loadComponent(binder?: ViewModel): Promise<HTMLElement> {
         const builder = new TemplateBuilder();
         const html = await builder.getParsedHtml('app.html', binder);
         (document.querySelector("#root") as HTMLDivElement).replaceWith(html);

@@ -1,0 +1,10 @@
+.lb-input:not(
+  [type="checkbox"],
+  [type="radio"],
+  [type="submit"]
+) {
+  height: 2em;
+  border-radius: .7em;
+  border: none;
+  padding: 0 .8em;
+}

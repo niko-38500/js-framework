@@ -25,14 +25,63 @@ export default class TemplateBuilder extends TemplateResolver {
             throw err;
         }
 
-        const parsedHtml: HTMLElement = this.parseStringAsDom(htmlContent);
+        if (this.regexGlobalIfStatement.test(htmlContent)) {
+            htmlContent = this.buildIfStatement(htmlContent);
+        }
 
-        return parsedHtml;
+        if (this.regexGlobalInterpolation.test(htmlContent)) {
+            htmlContent = this.resolveInterpolation(htmlContent, args)
+        }
+
+        if (this.regexGlobalIfStatement) {
+            htmlContent = this.resolveIfStatement(htmlContent)
+        }
+
+        if (this.regexGlobalHtmlEvent.test(htmlContent)) {
+            htmlContent = this.resolveHtmlEvent(htmlContent);
+        }
+
+        return this.parseStringAsDom(htmlContent);
     }
 
     private parseStringAsDom(htmlContent: string): HTMLElement {
         let div = document.createElement("div");
         div.innerHTML = htmlContent;
         return div;
+    }
+
+    private buildIfStatement(html: string) {
+        const matchedIfStatements = html.match(this.regexGlobalIfStatement)!;
+        matchedIfStatements.forEach((matchedIfStatement: string) => {
+            const matchedCondition = matchedIfStatement.match(this.regexResolverStringCondition)![1];
+            const splitedCondition = matchedCondition.split(/(===?|!==?|<=?|>=?|\|\||&&)/);
+            let newCondition = "";
+            splitedCondition.forEach((conditionPart: string) => {
+                if (
+                    !/(true|false)/.test(conditionPart) &&
+                    !/[0-9]+/.test(conditionPart) &&
+                    !/"[0-9a-zA-Z]*?"/.test(conditionPart) &&
+                    !/(===?|!==?|<=?|>=?|\|\||&&)/.test(conditionPart)
+                ) {
+                    if (/(\(|\)|!)+/.test(conditionPart)) {
+                        conditionPart.split(/(\(|\)|!)+/).forEach((element: string) => {
+                            if (/(\(|\)|!)+|^\s$/.test(element) || element.length === 0) {
+                                newCondition += element
+                                return;
+                            }
+                            newCondition += "{{ " + element + " }}";
+                            return;
+                        })
+                        return;
+                    }
+                    newCondition += "{{ " + conditionPart + " }} ";
+                    return;
+                }
+                newCondition += conditionPart + " ";
+            })
+            const newIfStatement = matchedIfStatement.replace(matchedCondition, newCondition);
+            html = html.replace(matchedIfStatement, newIfStatement);
+        })
+        return html;
     }
 }

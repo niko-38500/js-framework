@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "lightweight js framework based on mvvm arch",
   "main": "index.html",
+  "dependencies": {
+    "rfs": "^9.0.6"
+  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",

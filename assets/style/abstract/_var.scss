@@ -1,0 +1,46 @@
+/////////////////    Font   //////////////////
+$fontFamily: sans-serif;
+$headerTitleFamily:'Kalam';
+
+/////////////////    Color    //////////////////
+
+$primary: #fefefe;
+$secondary: rgba(48, 48, 58, 0.74);
+$t: rgba(219, 80, 74, 0.78);
+$yellow: #b58900;
+$orange: #cb4b16;
+$red: #dc322f;
+$magenta: #d33682;
+$violet: #6c71c4;
+$blue: #268bd2;
+$cyan: #2aa198;
+$green: #859900;
+
+/////////////////    Size    //////////////////
+
+$headerHeight: 5em;
+
+/////////////////    Theme    //////////////////
+
+$themes: (
+        "dark": (
+                "layout": #839496,
+                "element": #93a1a1,
+                "border": #073642,
+                "font": #002b36,
+                "button": #657b83,
+                "base01": #586e75,
+                "base02": #eee8d5,
+                "bg": #fdf6e3
+        ),
+        "light": (
+                "layout": #657b83,
+                "element": #586e75,
+                "font": #eee8d5,
+                "border": #fdf6e3,
+                "button": #839496,
+                "base01": #93a1a1,
+                "base02": #073642,
+                "bg": #002b36
+        )
+);

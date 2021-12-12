@@ -18,7 +18,6 @@ export default class Binding {
         Binder.context = this.context;
         Binder.redefine(this.context);
 
-        console.log(Binder.getSubscription())
         const binderHandler = (Binder.handlers as any)[this.handler];
         binderHandler.bind(this);
     }
