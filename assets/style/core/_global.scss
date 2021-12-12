@@ -1,3 +1,20 @@
-@import "normalize";
-@import "fonts_familly";
-@import "reset";
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--font);
+  font-family: $fontFamily;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button {
+  background: var(--secondary);
+  color: var(--font);
+  //padding: .8em 1.5em;
+  border: unset;
+  border-radius: .5em;
+  @include font-size(1.5rem);
+  cursor: pointer;
+}
