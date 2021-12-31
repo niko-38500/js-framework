@@ -27,7 +27,6 @@ export default class TemplateResolver {
         ifMatches.forEach((element: string) => {
             const ifStatement = element.match(regexIfStatement)!;
             const condition = ifStatement[1];
-            console.log(element)
             if (eval(condition)) {
                 html = html.split(ifStatement[0]).join(ifStatement[2]);
             }
@@ -80,7 +79,6 @@ export default class TemplateResolver {
                     typeof (args[match[1]]) !== "boolean"
                 ) {
                     const type = Array.isArray(args[match[1]]) ? " array " : typeof args[match[1]]
-                    console.log(type)
                     throw new DOMException(
                         "Error for : " +
                         match[1] +
@@ -97,7 +95,7 @@ export default class TemplateResolver {
                 replacedHtml += e;
             }
         });
-        // console.log(replacedHtml)
+
         return replacedHtml;
     }
 }

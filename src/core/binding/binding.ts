@@ -1,7 +1,9 @@
 import ViewModel from "../component/view.model.js";
 import Binder from "./binder.js";
+import BindingInterface from "./interfaces/binding.interface.js";
+import {SubscriptionsInterface} from "./interfaces/subscriptions.interface";
 
-export default class Binding {
+export default class Binding implements BindingInterface {
     property: string;
     handler: string;
     element: Element;
@@ -22,60 +24,26 @@ export default class Binding {
         binderHandler.bind(this);
     }
 
+    unbind(): void {
+        Binder.getSubscriptions().forEach((subscription: SubscriptionsInterface) => {
+            const key = subscription.param;
+            Binder.unsubscribe(key);
+        })
+    }
+
     setValue(value: string | boolean | number): void {
-
-        const clone = (obj: any): any => {
-            let buf; // the cloned object
-            if (obj instanceof Array) {
-                buf = []; // create an empty array
-                let i = obj.length;
-                while (i --) {
-                    buf[i] = clone(obj[i]); // recursively clone the elements
-                }
-                return buf;
-            } else if (obj instanceof Object) {
-                buf = {}; // create an empty object
-                for (const k in obj) {
-                    if (obj.hasOwnProperty(k)) { // filter out another array's index
-                        (buf as any)[k] = clone(obj[k]); // recursively clone the value
-                    }
-                }
-                return buf;
-            } else {
-                return obj;
-            }
-        }
-
-
-
-
-
-
         if (/[\[\]]+/.test(this.property)) {
 
             const splitArg = this.property.split(/([\[|\]])/g);
-            const accessor = splitArg[0];
-            // splitArg.shift();
-            // const args = splitArg.join('');
-            // let full = `[${accessor}]${args}`;
             const args = this.property.split(/[\[\]]/g).filter(e => e !== '');
-            let ctx = (this.context as any);
-            args.map((e: any, i: number) => {
+            let context = (this.context as any);
+            args.map((arg: any, i: number) => {
                 if (i + 1 === args.length) {
-                    ctx[e] = value;
+                    context[arg] = value;
                     return;
                 }
-                ctx = ctx[e]
+                context = context[arg]
             });
-            // console.log(b);
-            // filteredArray.forEach((e: string, i: number) => {
-            //     if (filteredArray.length === i + 1) {
-            //         console.log(this.property);
-            //         (this.context as any)[accessor][i][e] = value;
-            //         return;
-            //     }
-            //
-            // });
             return;
         }
         (this.context as any)[this.property] = value;

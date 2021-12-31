@@ -7,8 +7,7 @@ import BinderForHandler from "./handlers/binder.for.handler.js";
 
 export default abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
-    static context: ViewModel; // delete
-    static test: any;
+    static context: ViewModel;
     static handlers = {
         value: new BinderValueHandler(),
         text: new BinderTextHandler(),
@@ -39,7 +38,7 @@ export default abstract class Binder {
                             this.redefine(context[key]);
                         }
                     }
-                    const e = accessor
+                    const objectKey = accessor
                         ? `${accessor}[${key}]`
                         : key;
                     let value = context[key];
@@ -52,36 +51,13 @@ export default abstract class Binder {
                             const shouldUpdate = newValue !== value;
                             value = newValue;
                             if (shouldUpdate) {
-                                console.log(e)
-                                Binder.notify(e);
+                                Binder.notify(objectKey);
                             }
                         }
                     })
                 }
             })
         }
-
-        /*
-        const keys = Object.keys(this.context);
-        keys.forEach((key: string) => {
-            let value = (this.context as any)[key];
-            delete (this.context as any)[key];
-            Object.defineProperty(this.context, key, {
-                get() {
-                    return value;
-                },
-                set(newValue: string): void {
-                    console.log("sdgf");
-                    const shouldUpdate = newValue !== value;
-                    value = newValue;
-                    if (shouldUpdate) {
-                        Binder.notify(key);
-                    }
-                }
-            })
-        });
-
-         */
     }
 
     static subscribe(key: string, callback: () => any): void {
@@ -98,7 +74,6 @@ export default abstract class Binder {
     }
 
     static notify(params: string): void {
-        // if (Object.getOwnPropertyDescriptor(this.subscriptions, params))
         const subscriptions = this.subscriptions.filter((subscription: SubscriptionsInterface) => {
             return subscription.param === params
         });
@@ -107,7 +82,7 @@ export default abstract class Binder {
         });
     }
 
-    static getSubscription(): SubscriptionsInterface[] {
+    static getSubscriptions(): SubscriptionsInterface[] {
         return this.subscriptions;
     }
 }

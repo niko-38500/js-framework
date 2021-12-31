@@ -1,26 +1,11 @@
 import ViewModel from "../core/component/view.model.js";
 
-export default class AppComponent extends ViewModel{
-    name = 'john';
-    lastname = "Doe";
+export default class AppComponent extends ViewModel {
     isDarkModeEnable = document.documentElement.getAttribute('dark') === '';
 
-    tab = [
-        {
-            a: "azhe",
-            b: 2,
-            c: {
-                a: "azer"
-            },
-        },
-        {
-            a: "ffdsf",
-            b: 44,
-            c: {
-                a: "azerty"
-            },
-        }
-    ];
+    onDestroy() {
+        super.onDestroy();
+    }
 
     toggleDarkMode() {
         const isDark = document.documentElement.getAttribute("dark");
@@ -31,15 +16,20 @@ export default class AppComponent extends ViewModel{
         document.documentElement.setAttribute("dark", "");
     }
 
-    onInit() {
-
+    setActiveLink(event: Event) {
+        (event.currentTarget as HTMLElement).querySelectorAll('li').forEach((element: HTMLElement) => {
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                return;
+            }
+        });
+        (event.target as HTMLElement).parentElement!.classList.add('active');
     }
 
-    onLoaded() {
-        super.onLoaded();
-    }
-
-    onDestroy() {
-        super.onDestroy();
+    removeActive() {
+        const navLinks = document.querySelectorAll('.nav-links > li');
+        navLinks.forEach((element: Element) => {
+            element.classList.remove('active');
+        })
     }
 }

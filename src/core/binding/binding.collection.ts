@@ -2,14 +2,18 @@ import Binding from "./binding.js";
 import ViewModel from "../component/view.model.js";
 import BindingEvent from "./binding.event.js";
 import BinderEventInterface from "./interfaces/binder.event.interface.js";
+import BindingNavigation from "./binding.navigation.js";
+import BindingInterface from "./interfaces/binding.interface.js";
 
 export default class BindingCollection {
-    bindingCollection: { [key:string]: Binding[] } = {};
+    bindingCollection: { [key:string]: BindingInterface[] } = {};
+    private static instance: BindingCollection|null = null;
+
+    private constructor() {}
 
     addBinding(elements: Element, context: ViewModel): void {
         const component = Object.getPrototypeOf(context).constructor.name;
         (this.bindingCollection as any)[component] = [];
-
         elements.querySelectorAll('[html-dynamic-event]').forEach((htmlEvent: Element) => {
             const parameterEvent = htmlEvent.getAttribute("html-dynamic-event")!;
             const event = parameterEvent.split(":")[0];
@@ -26,7 +30,8 @@ export default class BindingCollection {
             }
 
             const bindingEvent = new BindingEvent();
-            bindingEvent.addEvent(eventBinder);
+            bindingEvent.bind(eventBinder);
+            (this.bindingCollection as any)[component].push(bindingEvent);
         })
 
         elements.querySelectorAll('[lb-for]').forEach((element: Element) => {
@@ -44,5 +49,30 @@ export default class BindingCollection {
             (this.bindingCollection as any)[component].push(binding);
             binding.bind();
         });
+
+        const navigateElement = elements.querySelectorAll('[navigate]');
+        if (0 === navigateElement.length) {
+            return;
+        }
+        const bindNavigation = new BindingNavigation(elements, navigateElement);
+        bindNavigation.bind();
+        (this.bindingCollection as any)[component].push(bindNavigation);
+    }
+
+    clearBinding(component: string) {
+        this.bindingCollection[component].forEach((binding: BindingInterface) => {
+            binding.unbind();
+        })
+    }
+
+    getBindings() {
+        return this.bindingCollection;
+    }
+
+    static getInstance() {
+        if (null === this.instance) {
+            this.instance = new BindingCollection();
+        }
+        return this.instance;
     }
 }

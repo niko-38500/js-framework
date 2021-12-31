@@ -1,15 +1,10 @@
 <header>
-    <h1 navigate="home" class="header-title">La balnave</h1>
+    <h1 (click)="removeActive" class="header-title">La balnave</h1>
     <nav class="header-nav">
-        <ul class="nav-links">
-            <li><a navigate="test" class="animate-underline">Documentation</a></li>
-            <li><a class="animate-underline">About</a></li>
+        <ul (click)="setActiveLink" class="nav-links">
+            <li><a href="https://github.com/niko-38500/js-framework/wiki" class="animate-underline">Documentation</a></li>
         </ul>
     </nav>
-    <div id="search-input-box">
-        <input class="lb-input" type="text" placeholder="Search..." id="search-input">
-        <button>🔎</button>
-    </div>
     <div class="toggle-dark-mode">
         <div class="toggle-checkbox">
             <input {% if isDarkModeEnable %}checked{% endif %} (click)="toggleDarkMode" id="checkbox-toggler" type="checkbox" />
@@ -17,26 +12,3 @@
         </div>
     </div>
 </header>
-<main>
-    <div class="burger-menu">
-        <span></span>
-    </div>
-    <div bind="text: tab[0][a]"></div>
-    <input bind="value: tab[0][a]" type="text" />
-    <p bind='if: tab[0][a] !== ""'>ezfzeef</p>
-    <p {% if isDarkModeEnable %}style="color: green;"{% endif %}>work</p>
-
-    <router></router>
-</main>
-<footer>
-    <span class="copyright">&copy;MIT La balnave</span>
-    <nav class="footer-nav">
-        <ul>
-            <li><a navigate="test">Link 1</a></li>
-            <li><a navigate="home">link 2</a></li>
-            <li><a href="#">link 3</a></li>
-            <li><a href="#">link 4</a></li>
-            <li><a href="#">link 5</a></li>
-        </ul>
-    </nav>
-</footer>

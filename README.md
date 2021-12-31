@@ -6,16 +6,16 @@
     An Awesome lightweight TS framework based on MVVM
     <br/>
     <br/>
-    <a href="https://github.com/niko-38500/ReadME-Generator"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/niko-38500/js-framework/wiki"><strong>Explore the docs »</strong></a>
     <br/>
     <br/>
-    <a href="https://github.com/niko-38500/ReadME-Generator/issues">Report Bug</a>
+    <a href="https://github.com/niko-38500/js-framework/issues">Report Bug</a>
     .
-    <a href="https://github.com/niko-38500/ReadME-Generator/issues">Request Feature</a>
+    <a href="https://github.com/niko-38500/js-framework/issues">Request Feature</a>
   </p>
 </p>
 
-![Downloads](https://img.shields.io/github/downloads/niko-38500/ReadME-Generator/total) ![Contributors](https://img.shields.io/github/contributors/niko-38500/ReadME-Generator?color=dark-green) ![License](https://img.shields.io/github/license/niko-38500/ReadME-Generator)
+![Downloads](https://img.shields.io/github/downloads/niko-38500/js-framework/total) ![Contributors](https://img.shields.io/github/contributors/niko-38500/js-framework?color=dark-green) ![License](https://img.shields.io/github/license/niko-38500/js-framework)
 
 ## Table Of Contents
 
@@ -29,11 +29,10 @@
 * [Contributing](#contributing)
 * [License](#license)
 * [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
-# La balnave
+### La balnave
 La balnave is a lightweight typescript framework based on MVVM architecture and use SCSS for styling, MIT-licensed open source project.
 Actual features :
 
@@ -48,9 +47,6 @@ Actual features :
     - onInit, onLoaded, onDestroy (others will come)
 - Native dark mode
 - Routing
-
-| :exclamation: ensure that you have configured your server side to redirect all url to index.html
-|---
 
 ## Built With
 
@@ -83,17 +79,12 @@ npm install
 
 ## Usage
 
-To learn how to use this framework, please refer to the _[Documentation](https://example.com)_
+To learn how to use this framework, please refer to the _[Documentation](https://github.com/niko-38500/js-framework/wiki)_
 
 ## Roadmap
 
-See the [open issues](https://github.com/niko-38500/ReadME-Generator/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/niko-38500/js-framework/issues) for a list of proposed features (and known issues).
 ### Next update planned
-* most efficient routing and event binding
-    * separate events and bindings for their own component
-* update view when data change in the model
-    * for conditions too (update view when condition argument change)
-* improve sass architecture
 * separate all features in npm package and allow to run a project with npx command
     * allow to launch a project with all features or just the minimal viable
 
@@ -103,7 +94,7 @@ Contributions are what make the open source community such an amazing place to b
 * If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/niko-38500/ReadME-Generator/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
 * Please make sure you check your spelling and grammar.
 * Create individual PR for each suggestion.
-* Please also read through the [Code Of Conduct](https://github.com/niko-38500/ReadME-Generator/blob/main/CODE_OF_CONDUCT.md) before posting your first idea as well.
+* Please also read through the [Code Of Conduct](https://github.com/niko-38500/js-framework/wiki/Contributor) before posting your first idea as well.
 
 ### Creating A Pull Request
 

@@ -2,6 +2,7 @@ import TemplateResolver from "./template.resolver.js";
 import FS from "../utiles/FS.js";
 
 export default class TemplateBuilder extends TemplateResolver {
+
     private getHtmlText(file: string): Promise<string> {
         return fetch(FS.pathJoin("src/app", file))
             .then((res: any) => {
@@ -33,7 +34,7 @@ export default class TemplateBuilder extends TemplateResolver {
             htmlContent = this.resolveInterpolation(htmlContent, args)
         }
 
-        if (this.regexGlobalIfStatement) {
+        if (this.regexGlobalIfStatement.test(htmlContent)) {
             htmlContent = this.resolveIfStatement(htmlContent)
         }
 

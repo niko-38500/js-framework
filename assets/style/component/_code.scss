@@ -1,0 +1,15 @@
+code {
+  margin: 0 auto;
+  background: #000;
+  width: 90%;
+  color: white;
+  position: relative;
+  display: block;
+  border-radius: 0.3em;
+  padding: 4px 5px 6px;
+  white-space: nowrap;
+
+  .code-color {
+    color: #2aa198;
+  }
+}
