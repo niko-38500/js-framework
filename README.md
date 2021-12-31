@@ -1,6 +1,6 @@
 <br/>
 <p align="center">
-  <h3 align="center">La balnave</h3>
+  <h3 align="center">js-framework</h3>
 
   <p align="center">
     An Awesome lightweight TS framework based on MVVM
@@ -32,7 +32,7 @@
 
 ## About The Project
 
-### La balnave
+### Js-framework
 La balnave is a lightweight typescript framework based on MVVM architecture and use SCSS for styling, MIT-licensed open source project.
 Actual features :
 
@@ -67,7 +67,7 @@ to start this project you need to have
 1.  Clone the repo
 
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone git@github.com:niko-38500/js-framework.git
 ```
 2. Install NPM packages
 
