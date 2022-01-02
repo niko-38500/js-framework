@@ -39,6 +39,7 @@ export default class BindingCollection {
             const binding = new Binding(callback, "for", element, context);
             (this.bindingCollection as any)[component].push(binding);
             binding.bind();
+
         });
 
         elements.querySelectorAll('[bind]').forEach((element: Element) => {
@@ -57,6 +58,13 @@ export default class BindingCollection {
         const bindNavigation = new BindingNavigation(elements, navigateElement);
         bindNavigation.bind();
         (this.bindingCollection as any)[component].push(bindNavigation);
+    }
+
+    addSingleBinding(property: string, handler: string, element: HTMLElement, context: ViewModel) {
+        const component = Object.getPrototypeOf(context).constructor.name;
+        const binding = new Binding(property, handler, element, context);
+        binding.bind();
+        (this.bindingCollection as any)[component].push(binding);
     }
 
     clearBinding(component: string) {

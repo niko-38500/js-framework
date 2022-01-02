@@ -19,8 +19,7 @@ export default class Binding implements BindingInterface {
     bind(): void {
         Binder.context = this.context;
         Binder.redefine(this.context);
-
-        const binderHandler = (Binder.handlers as any)[this.handler];
+        const binderHandler = Object.create((Binder.handlers as any)[this.handler]);
         binderHandler.bind(this);
     }
 

@@ -1,7 +1,31 @@
 import ViewModel from "../core/component/view.model.js";
 
+interface Todo {
+    desc: string,
+    date: string
+}
+
 export default class AppComponent extends ViewModel {
     isDarkModeEnable = document.documentElement.getAttribute('dark') === '';
+    todos: Todo[] = [
+        {
+            desc: "description",
+            date: "2022-01-01"
+        },
+        {
+            desc: "desfcription",
+            date: "2022-02-01"
+        }
+    ];
+
+    aaz = [
+        "sdkfj",
+        "fskmlefj"
+    ]
+
+    onInit() {
+        console.log(Date.now())
+    }
 
     onDestroy() {
         super.onDestroy();
@@ -31,5 +55,28 @@ export default class AppComponent extends ViewModel {
         navLinks.forEach((element: Element) => {
             element.classList.remove('active');
         })
+    }
+
+    subList(event: Event) {
+        const todo: Todo = {
+            date: "",
+            desc: ""
+        };
+
+        const form = (event.currentTarget as HTMLElement).parentElement!.children;
+        for (let i of form) {
+            if (i instanceof HTMLInputElement && "" === i.value) return;
+            switch (i.id) {
+                case 'desc' :
+                    todo['desc'] = (i as HTMLInputElement).value;
+                break;
+                case 'date' :
+                    todo['date'] = (i as HTMLInputElement).value;
+                break;
+            }
+        }
+        (this.todos as any) = todo;
+        (this.aaz as any) = todo.desc
+        // console.log(this.todos)
     }
 }

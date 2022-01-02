@@ -4,6 +4,8 @@ import BinderValueHandler from "./handlers/binder.value.handler.js";
 import BinderTextHandler from "./handlers/binder.text.handler.js";
 import BinderIfHandler from "./handlers/binder.if.handler.js";
 import BinderForHandler from "./handlers/binder.for.handler.js";
+import BindingCollection from "./binding.collection.js";
+import Binding from "./binding";
 
 export default abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
@@ -12,7 +14,7 @@ export default abstract class Binder {
         value: new BinderValueHandler(),
         text: new BinderTextHandler(),
         if: new BinderIfHandler(),
-        for: new BinderForHandler(),
+        for: new BinderForHandler,
     };
     // TODO : when a new subscriptions is set verify if the property is already observed
 
@@ -42,7 +44,35 @@ export default abstract class Binder {
                         ? `${accessor}[${key}]`
                         : key;
                     let value = context[key];
+
                     delete context[key]
+                    if (Array.isArray(value)) {
+                        Object.defineProperty(context, key, {
+                            get() {
+                                return value;
+                            },
+                            set(newValue: any): void {
+                                if (newValue instanceof Object) {
+                                    for (const prop in newValue) {
+                                        const o = JSON.parse(JSON.stringify(newValue))
+                                        Object.defineProperty(newValue, prop, {
+                                            get(): any {
+                                                return o[prop]
+                                            },
+                                            set(newValu: any) {
+                                                newValu[prop] = newValue;
+                                            }
+                                        })
+                                    }
+                                    newValue.isNew = true;
+                                }
+                                value.push(newValue);
+
+                                Binder.notify(objectKey);
+                            }
+                        })
+                        return;
+                    }
                     Object.defineProperty(context, key, {
                         get() {
                             return value;

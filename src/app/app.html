@@ -12,3 +12,31 @@
         </div>
     </div>
 </header>
+
+<main>
+    <h2>TODO :</h2>
+
+    <ul id="list" lb-for="z in aaz">
+        <p bind='text: z'></p>
+    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody lb-for="todo in todos">
+            <tr>
+                <td bind='text: todo.desc'></td>
+                <td bind='text: todo.date'></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="form">
+        <input type="text" id="desc" name="desc" />
+        <input type="date" id="date" name="date" />
+        <button (click)="subList">Submit</button>
+    </div>
+</main>
