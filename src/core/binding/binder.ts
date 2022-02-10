@@ -4,8 +4,6 @@ import BinderValueHandler from "./handlers/binder.value.handler.js";
 import BinderTextHandler from "./handlers/binder.text.handler.js";
 import BinderIfHandler from "./handlers/binder.if.handler.js";
 import BinderForHandler from "./handlers/binder.for.handler.js";
-import BindingCollection from "./binding.collection.js";
-import Binding from "./binding";
 
 export default abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
