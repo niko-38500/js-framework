@@ -4,29 +4,43 @@ const [, , ...args] = process.argv;
 const fs = require('fs');
 const path = require("path");
 
-const // CLI command
-    NEW = 'new',
-    GENERATE = 'generate'
-;
-
-const BOILERPLATE_FILES = [];
-
-const findFilesRecursively = (directory, recursiveFolder = '') => {
+const findFilesRecursively = (directory, listOfFile, recursiveFolder = '') => {
     const resolvedPath = path.resolve('cli', directory);
     const dir = fs.readdirSync(resolvedPath);
 
     dir.forEach((item) => {
         if (fs.lstatSync(item).isDirectory()) {
-            return fillBoilerplate(path.join(directory, item), item);
+            return findFilesRecursively(path.join(directory, item), listOfFile, item);
         }
 
-        BOILERPLATE_FILES.push(`${recursiveFolder}/${item}`);
+        const fileWithPath = '' !== recursiveFolder
+            ? `${recursiveFolder}/${item}`
+            : item
+        ;
+
+        listOfFile.push(fileWithPath);
     });
 };
 
-findFilesRecursively('boilerplate');
-console.log(BOILERPLATE_FILES);
+const // CLI command
+    NEW = 'new',
+    GENERATE = 'generate'
+;
 
 (function cli() {
-    console.log('mlsdfk');
+    if (NEW === args[0]) {
+        const boilerplateFiles = [];
+
+        findFilesRecursively('boilerplate', boilerplateFiles);
+
+        boilerplateFiles.forEach((file) => {
+            fs.copyFileSync(path.join(__dirname, file), file);
+        });
+        return;
+    } else if (GENERATE === args[0]) {
+        console.log('must be implemented');
+        return;
+    }
+
+    console.warn('please provide a valid argument');
 })();
