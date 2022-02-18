@@ -1,11 +1,11 @@
-import {SubscriptionsInterface} from "./interfaces/subscriptions.interface.js";
-import ViewModel from "../component/view.model.js";
-import BinderValueHandler from "./handlers/binder.value.handler.js";
-import BinderTextHandler from "./handlers/binder.text.handler.js";
-import BinderIfHandler from "./handlers/binder.if.handler.js";
-import BinderForHandler from "./handlers/binder.for.handler.js";
+import { SubscriptionsInterface } from "./interfaces/subscriptions.interface";
+import { ViewModel } from "../component/view.model";
+import { BinderValueHandler } from "./handlers/binder.value.handler";
+import { BinderTextHandler } from "./handlers/binder.text.handler";
+import { BinderIfHandler } from "./handlers/binder.if.handler";
+import { BinderForHandler } from "./handlers/binder.for.handler";
 
-export default abstract class Binder {
+export abstract class Binder {
     static subscriptions: SubscriptionsInterface[] = [];
     static context: ViewModel;
     static handlers = {

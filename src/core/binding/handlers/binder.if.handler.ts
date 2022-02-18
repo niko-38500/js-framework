@@ -1,8 +1,8 @@
-import Binding from "../binding.js";
-import Binder from "../binder.js";
-import BinderCondition from "../binder.condition.js";
+import { Binding } from '../binding';
+import { Binder } from '../binder';
+import { BinderCondition } from '../binder.condition';
 
-export default class BinderIfHandler extends BinderCondition {
+export class BinderIfHandler extends BinderCondition {
     display!: string;
 
     bind(binding: Binding) {

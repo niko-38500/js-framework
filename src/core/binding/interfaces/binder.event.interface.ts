@@ -1,6 +1,6 @@
-import ViewModel from "../../component/view.model.js";
+import { ViewModel } from "../../component/view.model.js";
 
-export default interface BinderEventInterface {
+export interface BinderEventInterface {
     element: Element;
     event: string;
     callback: () => any | void;

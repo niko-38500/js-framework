@@ -1,4 +1,4 @@
-export default class ViewModel {
+export class ViewModel {
     onInit() {}
     onLoaded() {}
     onDestroy() {}

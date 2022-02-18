@@ -1,9 +1,9 @@
-import Binding from '../binding.js';
-import BinderLoop from '../binder.loop.js';
-import Binder from '../binder.js';
-import BindingCollection from '../binding.collection.js';
+import { Binding } from '../binding';
+import { BinderLoop } from '../binder.loop';
+import { Binder } from '../binder';
+import { BindingCollection } from '../binding.collection';
 
-export default class BinderForHandler extends BinderLoop {
+export class BinderForHandler extends BinderLoop {
     loopAlias!: string;
     loopType!: string;
     loopContext!: string;
@@ -25,7 +25,7 @@ export default class BinderForHandler extends BinderLoop {
     }
 
     findChild(elements: HTMLCollection, i: number) {
-        for (const elem of elements) {
+        for (const elem of Array.from(elements)) {
             if (0 !== elem.children.length) {
                 this.findChild(elem.children, i);
             }
@@ -46,12 +46,11 @@ export default class BinderForHandler extends BinderLoop {
             const elements: HTMLElement[] = [];
             let updatedElement: HTMLElement[] = [];
             context.forEach((occurrence: any, i: number) => {
-                let wrapper: HTMLElement;
-                wrapper = ((this.loopedElements as HTMLElement).cloneNode(true) as HTMLElement);
+                const wrapper = ((this.loopedElements as HTMLElement).cloneNode(true) as HTMLElement);
                 const bindings = wrapper.children;
                 let elementIndex = 1;
 
-                for (let el of bindings) {
+                for (let el of Array.from(bindings)) {
                     if (0 !== el.children.length) {
                         this.findChild(el.children, i);
                     }
@@ -80,7 +79,7 @@ export default class BinderForHandler extends BinderLoop {
                     el = this.parseBindAttribute(el, i);
                     ++elementIndex;
                 }
-                for (const i of wrapper.children) {
+                for (const i of Array.from(wrapper.children)) {
                     elements.push((i as HTMLElement));
                 }
             });
@@ -100,7 +99,7 @@ export default class BinderForHandler extends BinderLoop {
                 const binder = BindingCollection.getInstance();
 
                 const bindRecursively = (subElements: HTMLCollection) => {
-                    for (const subElement of subElements) {
+                    for (const subElement of Array.from(subElements)) {
                         if (0 !== subElement.children.length) {
                             bindRecursively(subElement.children);
                         }

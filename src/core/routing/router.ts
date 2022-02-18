@@ -1,16 +1,16 @@
-import Route from "./route.js";
-import FS from "../utiles/FS.js";
-import TemplateBuilder from "../template_engine/template.builder.js";
-import BindingCollection from "../binding/binding.collection.js";
-import ViewModel from "../component/view.model.js";
+import { Route } from './route';
+import { FS } from '../utiles/FS';
+import { TemplateBuilder } from '../template_engine/template.builder';
+import { BindingCollection } from '../binding/binding.collection';
+import { ViewModel } from '../component/view.model';
 
-export default class Router {
+export class Router {
     private routes: Route[] = [];
     private static instance: Router | null = null;
     private _current: Route | null = null;
 
     private constructor(routes: Route[]) {
-        this.filesExist(routes)
+        this.filesExist(routes);
         this.hasDuplicate(routes);
         this.routes = routes;
         // window.history.pushState({page: "home"}, "", win);
@@ -19,7 +19,7 @@ export default class Router {
     private filesExist(routes: Route[]) {
         routes.forEach(async (route: Route) => {
             const fs = new FS();
-            const htmlPath = FS.pathJoin("app", route.htmlPath);
+            const htmlPath = FS.pathJoin('app', route.htmlPath);
             if (!(await fs.fileExist(htmlPath))) {
                 throw `error: ${htmlPath} no such file or directory`;
             }
@@ -44,9 +44,9 @@ export default class Router {
 
     private generateToken(): string {
         const characters: string[] =
-            "aM&W!67rtR@Vy0uCioZpeO+PqSD-2zF$GfvHJsdX%bnA~ETg#wQxc145*UIK3Lh?jklm8YBN9".split("");
+            'aM&W!67rtR@Vy0uCioZpeO+PqSD-2zF$GfvHJsdX%bnA~ETg#wQxc145*UIK3Lh?jklm8YBN9'.split('');
         const length = 20;
-        let token = "";
+        let token = '';
         for (let i = 0; i < length; i++) {
             const index = Math.round(Math.random() * characters.length - 1);
             token += characters[index];
@@ -65,23 +65,23 @@ export default class Router {
             const componentName = Object.getPrototypeOf(this.current!.viewModel).constructor.name;
             binder.clearBinding(componentName);
 
-            this.current.viewModel.onDestroy()
+            this.current.viewModel.onDestroy();
             this.current = null;
         }
 
         this.current = this.routes.filter((route: Route) => {
-            return route.name === name
+            return route.name === name;
         })[0];
 
         if (!this.current) {
             this.current = this.routes.filter((route: Route) => {
-                return route.url === name
+                return route.url === name;
             })[0];
         }
 
         if (!this.current) {
             // TODO : add a 404 page
-            throw `route doesn't exist: Router.ts:65`;
+            throw 'route doesn\'t exist: Router.ts:65';
         }
 
         if (null === window.history.state || window.history.state.page !== this.current.name) {
@@ -89,7 +89,7 @@ export default class Router {
         }
 
         this.loadComponent(this.current.viewModel, this.current.htmlPath).then((htmlComponent: HTMLElement) => {
-            binder.addBinding(htmlComponent, this.current!.viewModel)
+            binder.addBinding(htmlComponent, this.current!.viewModel);
             this.current!.viewModel.onLoaded();
         });
     }

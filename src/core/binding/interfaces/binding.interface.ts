@@ -1,3 +1,3 @@
-export default interface BindingInterface {
+export interface BindingInterface {
     unbind(): void
 }

@@ -1,8 +1,8 @@
-import Binding from "../binding.js";
-import Binder from "../binder.js";
-import BinderParameters from "../binder.parameters.js";
+import { Binding } from "../binding";
+import { Binder } from "../binder";
+import { BinderParameters } from "../binder.parameters";
 
-export default class BinderTextHandler extends BinderParameters {
+export class BinderTextHandler extends BinderParameters {
     bind(binding: Binding) {
         this.update(binding);
         Binder.subscribe(binding.property, () => {

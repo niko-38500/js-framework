@@ -1,11 +1,11 @@
-import ViewModel from "../component/view.model.js";
+import { ViewModel } from '../component/view.model';
 
-export default class Route {
+export class Route {
 
-    private _name: string = "";
-    private _url: string = "";
-    private _viewModel: ViewModel;
-    private _htmlPath: string = "";
+    private readonly _name: string = '';
+    private readonly _url: string = '';
+    private readonly _viewModel: ViewModel;
+    private readonly _htmlPath: string = '';
 
     constructor(url: string, name: string, viewController: ViewModel, htmlPath: string) {
         this._name = name;

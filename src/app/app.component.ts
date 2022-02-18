@@ -1,27 +1,27 @@
-import ViewModel from "../core/component/view.model.js";
+import { ViewModel } from '../core/component/view.model';
 
 interface Todo {
     desc: string,
     date: string
 }
 
-export default class AppComponent extends ViewModel {
+export class AppComponent extends ViewModel {
     isDarkModeEnable = document.documentElement.getAttribute('dark') === '';
     todos: Todo[] = [
         {
-            desc: "description",
-            date: "2022-01-01"
+            desc: 'description',
+            date: '2022-01-01'
         },
         {
-            desc: "desfcription",
-            date: "2022-02-01"
+            desc: 'desfcription',
+            date: '2022-02-01'
         }
     ];
 
     aaz = [
-        "sdkfj",
-        "fskmlefj"
-    ]
+        'sdkfj',
+        'fskmlefj'
+    ];
 
     onInit() {
         console.log(Date.now())
@@ -32,12 +32,12 @@ export default class AppComponent extends ViewModel {
     }
 
     toggleDarkMode() {
-        const isDark = document.documentElement.getAttribute("dark");
-        if (isDark === "") {
-            document.documentElement.removeAttribute("dark");
+        const isDark = document.documentElement.getAttribute('dark');
+        if (isDark === '') {
+            document.documentElement.removeAttribute('dark');
             return;
         }
-        document.documentElement.setAttribute("dark", "");
+        document.documentElement.setAttribute('dark', '');
     }
 
     setActiveLink(event: Event) {
@@ -54,29 +54,29 @@ export default class AppComponent extends ViewModel {
         const navLinks = document.querySelectorAll('.nav-links > li');
         navLinks.forEach((element: Element) => {
             element.classList.remove('active');
-        })
+        });
     }
 
     subList(event: Event) {
         const todo: Todo = {
-            date: "",
-            desc: ""
+            date: '',
+            desc: ''
         };
 
         const form = (event.currentTarget as HTMLElement).parentElement!.children;
-        for (let i of form) {
-            if (i instanceof HTMLInputElement && "" === i.value) return;
+        for (const i of Array.from(form)) {
+            if (i instanceof HTMLInputElement && '' === i.value) return;
             switch (i.id) {
-                case 'desc' :
-                    todo['desc'] = (i as HTMLInputElement).value;
+            case 'desc' :
+                todo['desc'] = (i as HTMLInputElement).value;
                 break;
-                case 'date' :
-                    todo['date'] = (i as HTMLInputElement).value;
+            case 'date' :
+                todo['date'] = (i as HTMLInputElement).value;
                 break;
             }
         }
         (this.todos as any) = todo;
-        (this.aaz as any) = todo.desc
+        (this.aaz as any) = todo.desc;
         // console.log(this.todos)
     }
 }

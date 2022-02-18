@@ -1,9 +1,9 @@
-import ViewModel from "../component/view.model.js";
-import Binder from "./binder.js";
-import BindingInterface from "./interfaces/binding.interface.js";
-import {SubscriptionsInterface} from "./interfaces/subscriptions.interface";
+import { ViewModel } from "../component/view.model";
+import { Binder } from "./binder";
+import { BindingInterface } from "./interfaces/binding.interface";
+import { SubscriptionsInterface } from "./interfaces/subscriptions.interface";
 
-export default class Binding implements BindingInterface {
+export class Binding implements BindingInterface {
     property: string;
     handler: string;
     element: Element;

@@ -1,6 +1,4 @@
-import Router from "../routing/router.js";
-
-export default class TemplateResolver {
+export class TemplateResolver {
     protected regexGlobalHtmlEvent = new RegExp("<.*? ?[\(]+.*[\)]+=\".*?\".*?>", "g");
     protected regexGlobalIfStatement = new RegExp("{% ?if ?.*? ?%}.*\n?.*?\n?.*{% endif %}", "g");
     protected regexResolverStringCondition = new RegExp("{% ?if (.*?) ?%}.*?{% ?endif ?%}", "s");
@@ -22,7 +20,7 @@ export default class TemplateResolver {
     }
 
     protected resolveIfStatement(html: string) {
-        const regexIfStatement = new RegExp("{% ?if ?(.*?) ?%}(.*?){% endif %}", "s");
+        const regexIfStatement = new RegExp('{% ?if ?(.*?) ?%}(.*?){% endif %}', 's');
         const ifMatches = html.match(this.regexGlobalIfStatement)!;
         ifMatches.forEach((element: string) => {
             const ifStatement = element.match(regexIfStatement)!;

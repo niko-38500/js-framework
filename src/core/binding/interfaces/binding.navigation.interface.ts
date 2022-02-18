@@ -1,6 +1,6 @@
-import Router from "../../routing/router.js";
+import {Router} from '../../routing/router.js';
 
-export default interface BindingNavigationInterface {
+export interface BindingNavigationInterface {
     element: Element;
     event: string;
     callback: () => any;

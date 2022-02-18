@@ -1,6 +1,5 @@
-// import Kernel from "./core/kernel.js";
-// import Router from "./core/routing/router.js";
-// import Route from "./core/routing/route.js";
+// import { Kernel } from './core/kernel';
+// import { Router } from './core/routing/router';
 //
 // const kernel = new Kernel();
 // kernel.initApp();
@@ -17,17 +16,16 @@
 //     router!.navigate(url);
 // });
 
+export { Router } from './core/routing/router';
+export { Route } from './core/routing/route';
+export { ViewModel } from './core/component/view.model';
+export { FS } from './core/utiles/FS';
 
 
 
 
-
-
-
-
-
-//////////////////////////////////////   Decorator pattern must be implemented   ///////////////////////////////////////
-
+//////////////////////////////////////   Decorator pattern. Must be implemented   //////////////////////////////////////
+//
 //
 // type a = {
 //     htmlFile?:string,
@@ -59,7 +57,7 @@
 //         console.log("msldfk")
 //     }
 // }
-//
+///////////////////////////////////////////////
 
 
 

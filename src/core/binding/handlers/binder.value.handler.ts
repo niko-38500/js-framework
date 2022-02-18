@@ -1,7 +1,7 @@
-import Binding from "../binding.js";
-import BinderParameters from "../binder.parameters.js";
+import { Binding } from "../binding";
+import { BinderParameters } from "../binder.parameters";
 
-export default class BinderValueHandler extends BinderParameters {
+export class BinderValueHandler extends BinderParameters {
     callback!: () => void;
 
     bind(binding: Binding) {

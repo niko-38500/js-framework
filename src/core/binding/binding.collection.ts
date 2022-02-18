@@ -1,11 +1,11 @@
-import Binding from "./binding.js";
-import ViewModel from "../component/view.model.js";
-import BindingEvent from "./binding.event.js";
-import BinderEventInterface from "./interfaces/binder.event.interface.js";
-import BindingNavigation from "./binding.navigation.js";
-import BindingInterface from "./interfaces/binding.interface.js";
+import { Binding } from "./binding";
+import { ViewModel } from "../component/view.model";
+import { BindingEvent } from "./binding.event";
+import { BinderEventInterface } from "./interfaces/binder.event.interface";
+import { BindingNavigation } from "./binding.navigation";
+import { BindingInterface } from "./interfaces/binding.interface";
 
-export default class BindingCollection {
+export class BindingCollection {
     bindingCollection: { [key:string]: BindingInterface[] } = {};
     private static instance: BindingCollection|null = null;
 

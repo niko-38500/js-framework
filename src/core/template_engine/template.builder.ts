@@ -1,7 +1,7 @@
-import TemplateResolver from "./template.resolver.js";
-import FS from "../utiles/FS.js";
+import { TemplateResolver } from "./template.resolver";
+import { FS } from "../utiles/FS";
 
-export default class TemplateBuilder extends TemplateResolver {
+export class TemplateBuilder extends TemplateResolver {
 
     private getHtmlText(file: string): Promise<string> {
         return fetch(FS.pathJoin("src/app", file))

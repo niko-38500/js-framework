@@ -1,9 +1,9 @@
-import AppComponent from "../app/app.component.js";
-import TemplateBuilder from "./template_engine/template.builder.js";
-import BindingCollection from "./binding/binding.collection.js";
-import ViewModel from "./component/view.model.js";
+import { AppComponent } from '../app/app.component';
+import { TemplateBuilder } from './template_engine/template.builder';
+import { BindingCollection } from './binding/binding.collection';
+import { ViewModel } from './component/view.model';
 
-export default class Kernel {
+export class Kernel {
     initApp(): void {
         this.initDarkMode();
         const appComponent = new AppComponent();
@@ -20,24 +20,24 @@ export default class Kernel {
         const builder = new TemplateBuilder();
         const html = await builder.getParsedHtml('app.html', component) as HTMLDivElement;
         html.id = 'root';
-        (document.querySelector("#root") as HTMLDivElement).replaceWith(html);
+        (document.querySelector('#root') as HTMLDivElement).replaceWith(html);
         return html;
     }
 
     private initDarkMode() {
-        const isDarkModeEnable = localStorage.getItem("dark-mode") === "true";
-        document.documentElement.addEventListener("change", () => {
-            const isDarkMode = document.documentElement.getAttribute("dark") === "";
+        const isDarkModeEnable = localStorage.getItem('dark-mode') === 'true';
+        document.documentElement.addEventListener('change', () => {
+            const isDarkMode = document.documentElement.getAttribute('dark') === '';
             if (isDarkMode) {
-                localStorage.setItem("dark-mode", "true");
+                localStorage.setItem('dark-mode', 'true');
                 return;
             }
-            localStorage.setItem("dark-mode", "false");
-        })
+            localStorage.setItem('dark-mode', 'false');
+        });
         if (isDarkModeEnable) {
-            document.documentElement.setAttribute("dark", "");
+            document.documentElement.setAttribute('dark', '');
             return;
         }
-        document.documentElement.removeAttribute("dark");
+        document.documentElement.removeAttribute('dark');
     }
 }

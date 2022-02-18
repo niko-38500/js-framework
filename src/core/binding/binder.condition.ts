@@ -1,6 +1,6 @@
-import Binding from "./binding.js";
+import { Binding } from "./binding";
 
-export default class BinderCondition {
+export class BinderCondition {
     conditionArgs: string[] = [];
 
     getParameters(binding: Binding) {

@@ -1,8 +1,8 @@
-import Router from "../routing/router.js";
-import BindingNavigationInterface from "./interfaces/binding.navigation.interface.js";
-import BindingInterface from "./interfaces/binding.interface.js";
+import { Router } from "../routing/router";
+import { BindingNavigationInterface } from "./interfaces/binding.navigation.interface";
+import { BindingInterface } from "./interfaces/binding.interface";
 
-export default class BindingNavigation implements BindingInterface {
+export class BindingNavigation implements BindingInterface {
     private element: Element;
     private navigateElements: NodeList;
     private readonly router?: Router;
@@ -24,7 +24,7 @@ export default class BindingNavigation implements BindingInterface {
             const view = element as HTMLElement;
             const callback = () => {
                 this.router?.navigate(view.getAttribute('navigate')!);
-            }
+            };
 
             const eventBinder: BindingNavigationInterface = {
                 element: view,

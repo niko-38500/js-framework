@@ -1,3 +1,3 @@
-export default class BinderParameters {
+export class BinderParameters {
 
 }

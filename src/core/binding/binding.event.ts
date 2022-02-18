@@ -1,7 +1,7 @@
-import BinderEventInterface from "./interfaces/binder.event.interface.js";
-import BindingInterface from "./interfaces/binding.interface.js";
+import { BinderEventInterface } from "./interfaces/binder.event.interface";
+import { BindingInterface } from "./interfaces/binding.interface";
 
-export default class BindingEvent implements BindingInterface { // TODO verify if events are separated for each components
+export class BindingEvent implements BindingInterface { // TODO verify if events are separated for each components
     private callback!: () => any | void;
     private event!: BinderEventInterface;
 
