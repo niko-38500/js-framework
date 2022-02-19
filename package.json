@@ -1,6 +1,6 @@
 {
-  "name": "js-framework",
-  "version": "0.0.1",
+  "name": "@nikode/matrix-js",
+  "version": "0.0.4",
   "description": "lightweight js framework based on mvvm arch",
   "author": "Nicolas Montmayeur",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
     "dev": "webpack"
   },
   "bin": {
-    "jsf": "cli/jsf.js"
+    "jsfrm": "cli/jsf.js"
   },
   "dependencies": {
     "rfs": "^9.0.6"

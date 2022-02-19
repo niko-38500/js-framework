@@ -1,0 +1,7 @@
+{
+    "ignorePatterns": [
+        "/cli/jsf.js",
+        "**/*.js",
+        "/cli/"
+    ]
+}
